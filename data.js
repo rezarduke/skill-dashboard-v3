@@ -632,11 +632,707 @@ window.DASHBOARD_DATA = {
     },
     {
       id: "week-2",
+      kind: "week",
       week: 2,
+      module: "BRANCH",
+      title: "分支協作，發出第一個拉取請求",
+      groups: [
+        {
+          no: "01",
+          title: "第一週課程實作複習",
+          note: "用指令重走一次 W1 的上線流程加深記憶，技能項目收錄在 W1 分頁。",
+        },
+        {
+          no: "02",
+          title: "Git GUI 與分支概念",
+          points: [
+            {
+              text: "CLI 與 GUI",
+              desc: "圖形化介面把指令變成看得到、可以點的畫面，底層做的事相同。",
+              done: false,
+            },
+            {
+              text: "安裝 Git Graph",
+              desc: "在 VS Code 擴充套件搜尋安裝，選作者 mhutchie 的那一個。",
+              done: false,
+            },
+            {
+              text: "讀懂提交歷史圖",
+              desc: "每個圓點是一次提交，線條與顏色代表分支怎麼分開又合起來。",
+              done: false,
+            },
+            {
+              text: "檢視單次提交的差異",
+              desc: "點一個提交看它動了哪些檔案，綠色 + 是新增、紅色 - 是刪除。",
+              done: false,
+            },
+            {
+              text: "main 與 origin/main 標籤",
+              desc: "對照兩個標籤是否在同一筆提交，就知道本機與遠端是否一致。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "分支概念",
+              desc: "一條獨立的開發線，改壞了主線依然是好的，做完再合併回去。",
+              done: false,
+            },
+            {
+              text: "開分支幾乎零成本",
+              desc: "分支像貼在進度上的標籤貼紙，不是複製整份專案，放心開。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "git branch",
+              desc: "列出所有分支，星號 * 標示目前所在的那一條。",
+              done: false,
+            },
+            {
+              text: "git switch",
+              desc: "切換到指定分支；加上 -c 可以建立並立即切換過去。",
+              done: false,
+            },
+            {
+              text: "checkout vs switch",
+              desc: "舊教學常用 checkout 切分支，作用相同，優先用語意清楚的 switch。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "分支互不干擾",
+              desc: "切回 main 會看到修改消失——那次修改只記錄在另一條分支上。",
+              done: false,
+            },
+            {
+              text: "Source Control 面板",
+              desc: "用滑鼠完成暫存與提交，等同 git add 與 git commit -m。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "git merge",
+              desc: "站在接收成果的那條分支上，把另一條分支的內容併進來。",
+              done: false,
+            },
+            {
+              text: "Vim 畫面離開方式",
+              desc: "合併提交跳出的編輯器，指令以冒號開頭：:q 離開、:q! 強制離開。",
+              done: false,
+            },
+            {
+              text: "git branch -d",
+              desc: "刪除已合併完成的分支；還沒合併的，小寫 -d 會出面阻止。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "03",
+          title: "分支保護與拉取請求",
+          points: [
+            {
+              text: "分支保護（Ruleset）",
+              desc: "套在指定分支上的一組規則，規定誰可以對這條分支做什麼。",
+              done: false,
+            },
+            {
+              text: "建立分支規則集",
+              desc: "Settings → Rules → Rulesets 新增，設定名稱、狀態與目標分支。",
+              done: false,
+            },
+            {
+              text: "合併前要求 PR",
+              desc: "最核心的保護：所有改動必須先開拉取請求，不能直接推送。",
+              done: false,
+            },
+            {
+              text: "禁刪除與禁強制推送",
+              desc: "頁面預設勾選的兩項，避免分支被誤刪或歷史被覆寫。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "其他保護規則一覽",
+              desc: "線性歷史、簽署提交、狀態檢查等，依團隊需要逐項加上。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "單人核准數陷阱",
+              desc: "GitHub 不允許自己核可自己的 PR，單人專案核准數設 1 會卡死。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "Pull Request 概念",
+              desc: "在 GitHub 上發出的合併請求，改動併入 main 前先被檢視審核。",
+              done: false,
+            },
+            {
+              text: "PR 與本地 merge 的差別",
+              desc: "本地合併只有你看得到；PR 把合併公開進行並留下紀錄。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "推 main 被擋（GH013）",
+              desc: "受保護的 main 直接推送會被拒絕，訊息指出必須走拉取請求。",
+              done: false,
+            },
+            {
+              text: "改推工作分支",
+              desc: "保護只設在 main 上，把工作分支推上 GitHub，再用它開 PR。",
+              done: false,
+            },
+            {
+              text: "base 與 compare",
+              desc: "base 是合併目的地、compare 是來源，把 compare 併進 base。",
+              done: false,
+            },
+            {
+              text: "合併 PR 並刪分支",
+              desc: "Merge → Confirm 看到 Merged 標記，再把用完的工作分支刪掉。",
+              done: false,
+            },
+            {
+              text: "git pull 同步收尾",
+              desc: "PR 併進 GitHub 的 main 後，本機切回 main 把最新內容拉下來。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "04",
+          title: "Git 合併衝突",
+          points: [
+            {
+              text: "合併衝突概念",
+              desc: "同一個檔案的同一處被兩邊改成不同內容，Git 停下來交給你。",
+              done: false,
+            },
+            {
+              text: "衝突不是錯誤",
+              desc: "多分支並行的正常現象；改不同行能自動合併，同一處才會撞。",
+              done: false,
+            },
+            {
+              text: "衝突標記",
+              desc: "HEAD 到 === 是目前分支的版本，=== 到 >>> 是併進來那邊的。",
+              done: false,
+            },
+            {
+              text: "在工作分支上解",
+              desc: "把 main 併進自己的分支，讓衝突在這裡浮現、在這裡解決。",
+              done: false,
+            },
+            {
+              text: "VS Code 衝突按鈕",
+              desc: "採用目前／傳入變更會留下你選的那邊，並把標記一起清掉。",
+              done: false,
+            },
+            {
+              text: "Accept Both 的陷阱",
+              desc: "對單一值來說兩邊都留是錯的，會變成兩份設定互相打架。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "確認標記清乾淨",
+              desc: "檔案裡不能殘留任何一個標記，漏掉一個網頁就可能壞掉。",
+              done: false,
+            },
+            {
+              text: "合併提交收尾",
+              desc: "解完衝突 add 再 commit，這筆提交記錄兩條線怎麼合起來。",
+              done: false,
+            },
+            {
+              text: "推回讓 PR 復活",
+              desc: "解完推上 GitHub，原本卡住的 PR 自動變成可合併，不必重開。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "05",
+          title: "撰寫好的分支、提交與拉取請求",
+          points: [
+            {
+              text: "一個分支＝一個任務",
+              desc: "一條分支從頭到尾只完成一件事，好審核、好回溯、也好取消。",
+              done: false,
+            },
+            {
+              text: "從 main 開新分支",
+              desc: "main 是最新最穩的正式版本，從它長出的分支才包含所有成果。",
+              done: false,
+            },
+            {
+              text: "分支命名慣例",
+              desc: "英文類別加斜線加 kebab-case 描述，例如 feature/mark-w1-completed。",
+              done: false,
+            },
+            {
+              text: "類別前綴四選一",
+              desc: "feature 功能、fix 修錯、docs 文件、chore 雜項，一眼看出性質。",
+              done: false,
+            },
+            {
+              text: "提交訊息格式",
+              desc: "類別: 中文描述——動詞開頭，一句話講清楚這次做了什麼。",
+              done: false,
+            },
+            {
+              text: "忍住不順手改",
+              desc: "看到別的問題先記下來，這條分支收工後再另開分支處理。",
+              done: false,
+            },
+            {
+              text: "提交前先看清單",
+              desc: "git status 看一眼要提交的檔案，冒出沒印象的就先弄清楚。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "PR 三段式內文",
+              desc: "改了什麼、為什麼要改、怎麼驗證，審核的人幾秒就能看懂。",
+              done: false,
+            },
+            {
+              text: "三個名字對準一件事",
+              desc: "分支、提交訊息、PR 標題精準對應同一個任務，命名自然清楚。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "06",
+          title: "Antigravity CLI 與 AI Agent 觀念",
+          points: [
+            {
+              text: "安裝 Antigravity CLI",
+              desc: "在終端機貼上一行官方指令安裝，重開終端機後才讀得到。",
+              done: false,
+            },
+            {
+              text: "agy 啟動與登入",
+              desc: "第一次啟動會開瀏覽器登入 Google 帳號，進得了介面就是裝好了。",
+              done: false,
+            },
+            {
+              text: "Web 版與 CLI 版差別",
+              desc: "差在能不能碰到你的電腦：CLI 的 AI 能讀檔、改檔、執行指令。",
+              done: false,
+            },
+            {
+              text: "AI Agent",
+              desc: "會動手的助理：你能在終端機做到的事，它幾乎都能代勞。",
+              done: false,
+            },
+            {
+              text: "token（詞元）",
+              desc: "AI 處理文字的最小單位，也是計費單位；中文比英文更耗。",
+              done: false,
+            },
+            {
+              text: "context（上下文）",
+              desc: "模型這次回答時眼前能看到的全部內容：對話、檔案與設定。",
+              done: false,
+            },
+            {
+              text: "context window",
+              desc: "context 的容量上限，像固定大小的桌面，疊滿就忘記最舊的。",
+              done: false,
+            },
+            {
+              text: "AI 沒有記憶",
+              desc: "每一輪都把先前對話整包重送，所以對話越長越貴、越易失憶。",
+              done: false,
+            },
+            {
+              text: "省 context 的習慣",
+              desc: "精準給相關檔案比整包倒進去好，適時開新對話清出空間。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "07",
+          title: "Agent Skills 概念",
+          points: [
+            {
+              text: "Agent Skills",
+              desc: "寫給 AI 看的標準作業說明書：一個資料夾加一份 SKILL.md。",
+              done: false,
+            },
+            {
+              text: "SKILL.md 結構",
+              desc: "frontmatter 寫 name 與 description，內文寫實際做法與規範。",
+              done: false,
+            },
+            {
+              text: "skills 自動觸發",
+              desc: "要求符合某個 skill 的用途時，AI 自動照規範做事，不必指名。",
+              done: false,
+            },
+            {
+              text: "安裝到 .agents/skills",
+              desc: "放進專案的 .agents/skills 資料夾即完成安裝，只對這個專案生效。",
+              done: false,
+            },
+            {
+              text: "/skills 檢查清單",
+              desc: "列出目前可用的 skills，確認名稱都有出現才算安裝成功。",
+              done: false,
+            },
+            {
+              text: "用 skills 走完流程",
+              desc: "create-branch、create-commit、create-pr 讓每一步自動符合慣例。",
+              done: false,
+            },
+            {
+              text: "規範只寫一次",
+              desc: "全班裝同一組 skills，每個人的分支、提交與 PR 格式就一致。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "08",
+          milestone: true,
+          title: "發出第一個拉取請求",
+          desc: "用「分支 → 提交 → 拉取請求」的正規流程，更新你上線的儀表板。",
+        },
+      ],
     },
     {
       id: "week-3",
+      kind: "week",
       week: 3,
+      module: "RECOVER",
+      title: "收回與退版，把流程交給 AI",
+      groups: [
+        {
+          no: "01",
+          title: "第二週課程實作複習",
+          note: "用中文 prompt 重走一次上線流程，技能項目收錄在 W2 分頁。",
+        },
+        {
+          no: "02",
+          title: "兩條分支的分工與平行工作",
+          points: [
+            {
+              text: "兩條分支平行工作",
+              desc: "兩個需求各開一條分支，誰先做完誰先合併——真實團隊的日常。",
+              done: false,
+            },
+            {
+              text: "分支不會自動更新",
+              desc: "建立時複製當下的 main，之後主線的變化它不會自動知道。",
+              done: false,
+            },
+            {
+              text: "先開好再動工",
+              desc: "兩條分支要在任何合併之前建立，才會從同一個起點出發。",
+              done: false,
+            },
+            {
+              text: "切換後內容跟著換",
+              desc: "切到另一條分支，剛合併的成果不見了——它保留出發時的樣子。",
+              done: false,
+            },
+            {
+              text: "衝突是怎麼埋下的",
+              desc: "先合併的改了主線，後面那條又改同一處，對撞就此註定。",
+              done: false,
+            },
+            {
+              text: "prompt 把範圍講死",
+              desc: "檔案、變數、值全寫進 prompt，並要求修改前先列出來確認。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "PR 被衝突擋下",
+              desc: "conflicts 提示出現、合併按鈕變灰，GitHub 列出打架的檔案。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "03",
+          title: "判讀與解決合併衝突",
+          points: [
+            {
+              text: "衝突在工作分支解",
+              desc: "站在自己的分支把 main 併進來，不把問題帶到共用的 main 上。",
+              done: false,
+            },
+            {
+              text: "讀懂 CONFLICT 訊息",
+              desc: "Automatic merge failed 代表合併停在半路，等你處理完收尾。",
+              done: false,
+            },
+            {
+              text: "both modified",
+              desc: "git status 把卡住的檔案標成雙方都改過，指出要處理的位置。",
+              done: false,
+            },
+            {
+              text: "HEAD 是哪一邊",
+              desc: "標記裡 HEAD 是你所在分支的版本，另一邊是剛併進來的 main。",
+              done: false,
+            },
+            {
+              text: "被圈進來的無辜行",
+              desc: "上下兩邊相同的行只是夾在衝突區塊裡，不用選邊，留一份就好。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "決定要留哪一套",
+              desc: "留這邊、留那邊、或換自己的值——沒有標準答案，但有錯的做法。",
+              done: false,
+            },
+            {
+              text: "跨檔案的一致性",
+              desc: "顏色與語言是同一個決定的兩半，兩個檔案必須選同一套。",
+              done: false,
+            },
+            {
+              text: "讓 AI 先說明不動手",
+              desc: "請它只解釋衝突內容、和自己讀到的對照，決定之後才讓它改。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "驗收看得見的證據",
+              desc: "搜尋標記確認清乾淨，打開網頁確認顏色與語言對得上。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "04",
+          title: "收回還沒推送的提交",
+          points: [
+            {
+              text: "提交代號（hash）",
+              desc: "每筆提交的身分證；開頭幾碼不與人撞到，就能用來指定它。",
+              done: false,
+            },
+            {
+              text: "HEAD 與 HEAD~1",
+              desc: "HEAD 指著你現在站的提交，HEAD~1 是往回數一筆。",
+              done: false,
+            },
+            {
+              text: "Git 的三個地方",
+              desc: "工作目錄、暫存區、提交歷史——一次修改的旅程由上往下走。",
+              done: false,
+            },
+            {
+              text: "git restore",
+              desc: "丟棄工作目錄的修改；沒提交過的內容丟了就救不回來。",
+              done: false,
+            },
+            {
+              text: "git restore --staged",
+              desc: "把檔案從暫存區退回工作目錄，內容保留、只是不再排隊。",
+              done: false,
+            },
+            {
+              text: "reset 的三種模式",
+              desc: "都是把 HEAD 往回移，差在暫存區與工作目錄要不要跟著回去。",
+              done: false,
+            },
+            {
+              text: "--soft 拆提交重做",
+              desc: "內容原封留在暫存區，適合訊息打錯、少加檔案時退回補齊。",
+              done: false,
+            },
+            {
+              text: "--hard 整筆丟掉",
+              desc: "三個地方一起拉回去，內容從眼前消失，執行前務必看清楚。",
+              done: false,
+            },
+            {
+              text: "git reflog",
+              desc: "HEAD 走過的完整足跡，被 hard 丟掉的提交還能從這裡找回。",
+              done: false,
+            },
+            {
+              text: "提交就是保護",
+              desc: "reflog 只救得回提交過的東西——做到一個段落就先提交。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "推過就不能 reset",
+              desc: "改寫歷史推不上去，硬推要 force push，會毀掉別人的紀錄。",
+              done: false,
+            },
+          ],
+        },
+        {
+          no: "05",
+          title: "退掉已經上線的改動",
+          points: [
+            {
+              text: "revert（退版）",
+              desc: "不動既有紀錄，用一筆內容相反的新提交把舊改動抵銷掉。",
+              done: false,
+            },
+            {
+              text: "reset vs revert 判準",
+              desc: "還沒推出去用 reset；推上去或別人在用就 revert，不確定選 revert。",
+              done: false,
+            },
+            {
+              text: "GitHub 的 Revert 按鈕",
+              desc: "對已合併的 PR 一鍵退版，自動開反向分支和新的 PR。",
+              done: false,
+            },
+            {
+              text: "歷史只長不短",
+              desc: "做了、退掉、放回來的每一筆都在，來龍去脈日後查得到。",
+              done: false,
+            },
+            {
+              text: "退版不等於失敗",
+              desc: "東西沒錯只是時機不對——先退回安全狀態，之後再放回來。",
+              done: false,
+            },
+            {
+              text: "revert 的 revert",
+              desc: "退版提交也是普通提交，再退一次就能把改動原樣放回來。",
+              done: false,
+            },
+            {
+              text: "revert --no-commit",
+              desc: "先產生反向改動停在暫存區，檢查過再自己提交收尾。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "退合併提交的坑",
+              desc: "合併提交有兩個來源，要指定保留哪邊；多半交給 Revert 按鈕。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "06",
+          title: "認識與安裝 GitHub CLI",
+          points: [
+            {
+              text: "GitHub CLI（gh）",
+              desc: "GitHub 官方命令列工具，把網頁上會點的按鈕變成終端機指令。",
+              done: false,
+            },
+            {
+              text: "git 與 gh 的分工",
+              desc: "開頭是 git 的動你的電腦，開頭是 gh 的動 GitHub 上的東西。",
+              done: false,
+            },
+            {
+              text: "安裝 gh",
+              desc: "Windows 用 winget、Mac 用 brew，裝完重開終端機再驗證版本。",
+              done: false,
+            },
+            {
+              text: "gh auth login",
+              desc: "用瀏覽器加一次性代碼授權帳號，整台電腦只需要做一次。",
+              done: false,
+            },
+            {
+              text: "順手設定 git 認證",
+              desc: "登入時選 Yes，之後 git push 不會再跳出登入視窗。",
+              done: false,
+              bonus: true,
+            },
+            {
+              text: "gh 指令結構",
+              desc: "gh 加資源加動作加選項：gh pr create 就是建立一個拉取請求。",
+              done: false,
+            },
+            {
+              text: "--web 開網頁驗證",
+              desc: "指令加 --web 改用瀏覽器打開對應頁面，做完馬上親眼確認。",
+              done: false,
+            },
+            {
+              text: "用 --help 查用法",
+              desc: "gh help、gh pr --help 一層層往下查，不需要背指令。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "07",
+          title: "用 Agent Skills 完成上線流程",
+          points: [
+            {
+              text: "慣例寫成 skills",
+              desc: "六個 skills 裝進專案，名稱與格式不再需要寫死在 prompt 裡。",
+              done: false,
+            },
+            {
+              text: "create-repo",
+              desc: "前置檢查後用 gh repo create 建立同名公開儲存庫並推送。",
+              done: false,
+            },
+            {
+              text: "create-pages",
+              desc: "用 gh api 開啟 GitHub Pages，等建置完成回報網站網址。",
+              done: false,
+            },
+            {
+              text: "open-pr",
+              desc: "依實際改動產生標題與三段式內文，推送分支並發出 PR。",
+              done: false,
+            },
+            {
+              text: "merge-pr",
+              desc: "你確認過內容、開口之後才合併，刪除分支並同步本機 main。",
+              done: false,
+            },
+            {
+              text: "「不要做」的界線",
+              desc: "每個 skill 做完自己那一步就停，白名單以外的指令不執行。",
+              done: false,
+            },
+            {
+              text: "放行前看懂指令",
+              desc: "AI 執行 git／gh 前會先列出指令徵求同意，看懂再放行。",
+              done: false,
+            },
+            {
+              text: "合併不會自動發生",
+              desc: "發 PR 與合併拆成兩個 skills，要不要併進 main 由你開口。",
+              done: false,
+            },
+            {
+              text: "角色的轉變",
+              desc: "不再打指令、不再取名字：講清楚需求，然後把關放行。",
+              done: false,
+              bonus: true,
+            },
+          ],
+        },
+        {
+          no: "08",
+          milestone: true,
+          title: "全程用 AI 完成上線與拉取請求",
+          desc: "六個 skills 加上 gh：從建立儲存庫到合併 PR，都用中文描述需求完成。",
+        },
+      ],
     },
     {
       id: "week-4",
